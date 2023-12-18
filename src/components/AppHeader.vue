@@ -1,7 +1,9 @@
 <template>
-    <header>
-        <h1>Header</h1>
-    </header>
+    <nav class="navbar container-fluid">
+        <div class="container">
+            <span class="navbar-brand fs-1">Yu-Gi-Oh Api</span>
+        </div>
+    </nav>
 </template>
 <script>
 export default {
@@ -19,4 +21,8 @@ export default {
 <style lang="scss" scoped>
 @use '../style/partials/mixins' as*;
 @use '../style/partials/variables' as*;
+
+nav {
+    background-color: $bgcolor-header;
+}
 </style>
