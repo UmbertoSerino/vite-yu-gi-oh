@@ -1,12 +1,18 @@
 <template>
-    <article class="d-flex" v-for="character in store.charactersList" :key="character.id" :character="character">
-        <div>
-            <h2>{{ character.name }}</h2>
-            <div>
-                <img :src="character.card_images[0].image_url_small" alt="character.name">
-            </div>
+    <div class="container d-flex flex-wrap p-5 bg-white">
+        <div class="w-100 bg-dark p-3">
+            <h2 class="text-white">Found </h2>
         </div>
-    </article>
+        <article v-for=" character in store.charactersList" :key="character.id" :character="character">
+            <div class="card">
+                <img :src="character.card_images[0].image_url" class="card-img-top" :alt="character.name">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-white fw-bold"> {{ character.name }}</h5>
+                    <p class="card-text fs-5"> {{ character.archetype }} </p>
+                </div>
+            </div>
+        </article>
+    </div>
 </template>
   
 <script>
@@ -19,8 +25,7 @@ export default {
 
         }
     },
-    components: {
-    }
+
 };
 
 </script>
@@ -29,6 +34,18 @@ export default {
 @use '../style/partials/variables' as*;
 @use '../style/partials/mixins' as*;
 
-article {}
+article {
+    width: calc((100% / 5) - 1rem);
+    background-color: $bgcolor-white;
+    margin: 0 .5rem;
+    margin-bottom: 2rem;
+
+
+    div.card {
+        height: 100%;
+        background-color: $bgcolor-orange;
+    }
+
+}
 </style>
   

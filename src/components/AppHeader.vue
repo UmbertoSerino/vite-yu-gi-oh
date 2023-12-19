@@ -23,6 +23,6 @@ export default {
 @use '../style/partials/variables' as*;
 
 nav {
-    background-color: $bgcolor-header;
+    background-color: $bgcolor-white;
 }
 </style>
