@@ -1,5 +1,5 @@
 <template lang="">
-    <h1>Main</h1>
+    <AppCardElements />
 </template>
 <script>
 import AppCardElements from './AppCardElements.vue';
