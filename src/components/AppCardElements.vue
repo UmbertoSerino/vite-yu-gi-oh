@@ -1,9 +1,9 @@
 <template>
     <div class="container d-flex flex-wrap p-5 bg-white">
         <div class="w-100 bg-dark p-3">
-            <h2 class="text-white">Found </h2>
+            <h2 class="text-white">Found {{ foundCards() }} cards </h2>
         </div>
-        <article v-for=" character in store.charactersList" :key="character.id" :character="character">
+        <article v-for="character in filteredCharacters" :key="character.id" :character="character">
             <div class="card">
                 <img :src="character.card_images[0].image_url" class="card-img-top" :alt="character.name">
                 <div class="card-body text-center">
@@ -14,22 +14,27 @@
         </article>
     </div>
 </template>
-  
+
 <script>
 import { store } from '../js/store';
 export default {
     name: 'AppCardElements',
+    props: {
+        filteredCharacters: Array,
+    },
     data() {
         return {
             store,
-
         }
     },
-
+    methods: {
+        foundCards() {
+            return this.filteredCharacters.length;
+        },
+    },
 };
-
 </script>
-  
+
 <style lang="scss">
 @use '../style/partials/variables' as*;
 @use '../style/partials/mixins' as*;
@@ -40,12 +45,9 @@ article {
     margin: 0 .5rem;
     margin-bottom: 2rem;
 
-
     div.card {
         height: 100%;
         background-color: $bgcolor-orange;
     }
-
 }
 </style>
-  
