@@ -1,21 +1,18 @@
-<template lang="">
+<template>
     <main class="container-fluid d-flex flex-wrap">
         <section class="container">
-            <select v-model="selectedArchetype" name="selectedArchetype" id="selected-card">
+            <select name="selectedArchetype" id="selected-card" v-model="selectedArchetype">
                 <option value="All">All</option>
-                <option value="Alien">Alien</option>
-                <option value="Infernoble Arms">Infernoble Arms</option>
-                <option value="Noble Knight">Noble Knight</option>
+                <option v-for="(archetype, index) in store.archetypeList" :value="archetype" :key="index">{{ archetype }}</option>
             </select>
         </section>
-        <AppCardElements :filteredCharacters="filteredCharacters" />
+        <AppCardElements />
     </main>
 </template>
 
 <script>
 import { store } from '../js/store';
 import AppCardElements from './AppCardElements.vue';
-import axios from 'axios';
 
 export default {
     name: 'AppMain',
@@ -24,33 +21,9 @@ export default {
     },
     data() {
         return {
+            store,
             selectedArchetype: 'All',
-        }
-    },
-    computed: {
-        filteredCharacters() {
-            if (this.selectedArchetype === 'All') {
-                return store.charactersList;
-            } else {
-                return store.charactersList.filter(character => character.archetype === this.selectedArchetype);
-            }
-        },
-    },
-    created() {
-        this.getCharacters();
-    },
-    methods: {
-        getCharacters() {
-            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-                .then((response) => {
-                    store.charactersList = response.data.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                .finally(function () {
-                });
-        },
+        };
     },
 };
 </script>
