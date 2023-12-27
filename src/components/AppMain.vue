@@ -3,7 +3,7 @@
         <section class="container">
             <select name="selectedArchetype" id="selected-card" v-model="selectedArchetype">
                 <option value="All">All</option>
-                <option v-for="(archetype, index) in store.archetypeList" :value="archetype" :key="index">{{ archetype }}</option>
+                <option v-for="(archetype, index) in store.archetypeList" :value="archetype" :key="index">{{ archetype.archetype_name }}</option>
             </select>
         </section>
         <AppCardElements />
@@ -25,6 +25,10 @@ export default {
             selectedArchetype: 'All',
         };
     },
+    created() {
+        store.getArchetypes()
+
+    }
 };
 </script>
 

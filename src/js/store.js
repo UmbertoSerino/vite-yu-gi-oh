@@ -10,11 +10,19 @@ export const store = reactive({
             .then((response) => {
                 this.charactersList = response.data.data;
                 console.log('call charactersList', response);
-                this.archetypeList = this.charactersList.map(character => character.archetype);
-                console.log('call archetypeList', this.archetypeList);
             })
             .catch((error) => {
                 console.error('Error fetching characters:', error);
             });
     },
+    getArchetypes() {
+        axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+            .then((response) => {
+                this.archetypeList = response.data;
+                console.log('call archetypes', response)
+            }).catch((error) => {
+                console.error('Error fetching characters:', error);
+            });
+
+    }
 });
