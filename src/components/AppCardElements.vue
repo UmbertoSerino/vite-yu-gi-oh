@@ -1,31 +1,28 @@
 <template>
     <div class="container d-flex flex-wrap p-5 bg-white">
         <div class="w-100 bg-dark p-3">
-            <h2 class="text-white">Found {{ store.charactersList.length }} cards </h2>
+            <h2 class="text-white">Found {{ filteredCharacters.length }} cards</h2>
         </div>
-        <article v-for="character in store.charactersList" :key="character.id">
+        <article v-for="character in filteredCharacters" :key="character.id">
             <div class="card">
-                <img :src="character.card_images[0].image_url" class="card-img-top" :alt="character.name">
+                <img :src="character.card_images[0].image_url" class="card-img-top" :alt="character.name" />
                 <div class="card-body text-center">
-                    <h5 class="card-title text-white fw-bold"> {{ character.name }}</h5>
-                    <p class="card-text fs-5"> {{ character.archetype }} </p>
+                    <h5 class="card-title text-white fw-bold">{{ character.name }}</h5>
+                    <p class="card-text fs-5">{{ character.archetype }}</p>
                 </div>
             </div>
         </article>
     </div>
 </template>
-
+  
 <script>
-import { store } from '../js/store';
 export default {
     name: 'AppCardElements',
-    data() {
-        return {
-            store,
-        }
-    },
-    created() {
-        store.getCharacters()
+    props: {
+        filteredCharacters: {
+            type: Array,
+            required: true,
+        },
     },
 };
 </script>

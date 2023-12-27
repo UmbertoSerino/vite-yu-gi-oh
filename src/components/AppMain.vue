@@ -1,15 +1,15 @@
 <template>
     <main class="container-fluid d-flex flex-wrap">
         <section class="container">
-            <select name="selectedArchetype" id="selected-card" v-model="selectedArchetype">
+            <select name="selectedArchetype" id="selected-card" v-model="selectedArchetype" @change="callArchetypeChange">
                 <option value="All">All</option>
-                <option v-for="(archetype, index) in store.archetypeList" :value="archetype" :key="index">{{ archetype.archetype_name }}</option>
+                <option v-for="(archetype, index) in store.archetypeList" :value="archetype.archetype_name" :key="index">{{ archetype.archetype_name }}</option>
             </select>
         </section>
-        <AppCardElements />
+        <AppCardElements :filteredCharacters="filteredCharacters" />
     </main>
 </template>
-
+  
 <script>
 import { store } from '../js/store';
 import AppCardElements from './AppCardElements.vue';
@@ -26,9 +26,22 @@ export default {
         };
     },
     created() {
-        store.getArchetypes()
-
-    }
+        store.getArchetypes();
+    },
+    methods: {
+        callArchetypeChange() {
+            if (this.selectedArchetype === 'All') {
+                store.getCharacters();
+            } else {
+                store.getCharacters(this.selectedArchetype);
+            }
+        },
+    },
+    computed: {
+        filteredCharacters() {
+            return store.charactersList;
+        },
+    },
 };
 </script>
 
